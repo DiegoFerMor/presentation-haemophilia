@@ -63,15 +63,56 @@
         .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
         /* Incrementado el max-height para dar cabida a los 8 puntos */
         .accordion-item.active .accordion-content { max-height: 800px; }
-        .accordion-item.active .accordion-icon { transform: rotate(180deg); }
+        .accordion-item.active .accordion-icon { transform: rotate(180deg); color: #b91c1c; }
+        .accordion-item.active { border-color: #ef4444; }
         
         .text-balance { text-wrap: balance; }
         
         /* Color de selección de texto adaptado */
         ::selection { background-color: #ef4444; color: #ffffff; }
+
+        /* MAQUILLAJE CORPORATIVO PARA EL CHAT DE n8n BLINDADO */
+        :root {
+            --chat--color--primary: #4a0404 !important; /* Sangre oscura */
+            --chat--color--primary-shade-50: #7f1d1d !important; 
+            --chat--color--primary--shade-100: #991b1b !important; 
+            --chat--color--secondary: #b91c1c !important; /* Carmesí */
+            --chat--color-secondary-shade-50: #dc2626 !important; 
+            --chat--color-white: #ffffff !important;
+            --chat--color-light: #fef2f2 !important; /* Rojo pastel */
+            --chat--color-dark: #2d1b1b !important; 
+            --chat--toggle--background: #4a0404 !important; 
+            --chat--toggle--color: #ffffff !important; 
+        }
+
+        /* Bloqueo absoluto contra la hoja de estilos externa del chat para la burbuja */
+        #n8n-chat .chat-wrapper > button,
+        [class*="chat-toggle"] {
+            background-color: #4a0404 !important;
+            border-color: #4a0404 !important;
+            color: #ffffff !important;
+            transition: all 0.3s ease !important;
+        }
+
+        /* Forzamos en el hover */
+        #n8n-chat .chat-wrapper > button:hover,
+        [class*="chat-toggle"]:hover,
+        #n8n-chat .chat-wrapper > button:active,
+        [class*="chat-toggle"]:active {
+            background-color: #7f1d1d !important;
+            border-color: #7f1d1d !important;
+            transform: scale(1.05) !important;
+        }
+
+        .chat-window {
+            box-shadow: 0 10px 25px rgba(74, 4, 4, 0.15) !important;
+            font-family: 'Inter', sans-serif;
+        }
     </style>
+    <!-- Estilos de n8n Chat -->
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
 </head>
-<body class="bg-surface text-on-surface">
+<body class="bg-surface text-on-surface selection:bg-accent selection:text-primary">
 
     <nav class="fixed top-0 w-full z-50 glass-nav border-b border-surface-low shadow-sm transition-all">
         <div class="max-w-7xl mx-auto px-6 h-32 lg:h-40 flex justify-between items-center transition-all">
@@ -86,7 +127,7 @@
                 <a href="#faculty" class="text-sm font-semibold text-primary hover:text-secondary transition-colors uppercase tracking-widest text-[11px]">Faculty</a>
             </div>
             
-            </div>
+        </div>
     </nav>
 
     <main>
@@ -471,10 +512,24 @@
                     </div>
                 </div>
                 
-                <div class="mt-32 flex flex-wrap justify-center items-center gap-16 md:gap-24 lg:gap-32 reveal">
-                    <img src="./logos/logo_sehh.png" alt="SEHH" class="h-48 md:h-64 lg:h-80 w-auto drop-shadow-sm" onerror="this.src='https://placehold.co/350x150/transparent/4a0404?text=SEHH'">
-                    <img src="./logos/logo_seth.png" alt="SETH" class="h-20 md:h-28 lg:h-36 w-auto drop-shadow-sm" onerror="this.src='https://placehold.co/350x150/transparent/4a0404?text=SETH'">
-                    <img src="./logos/logo_cfc.PNG" alt="CFC SNS" class="h-24 md:h-32 lg:h-40 w-auto drop-shadow-sm" onerror="this.src='https://placehold.co/350x150/transparent/4a0404?text=CFC+SNS'">
+                <!-- Avales Logos Integrados y a todo color EXTRAMA SIZE -->
+                <div class="mt-24 pt-12 border-t border-outline/10 flex flex-col items-center gap-16 reveal w-full overflow-hidden">
+                    <!-- Fila 1: Sociedades -->
+                    <div class="flex flex-col items-center w-full">
+                        <span class="text-xs font-black uppercase tracking-[0.2em] text-primary/50 mb-8 block text-center">Medical endorsement to be requested from:</span>
+                        <div class="flex flex-wrap justify-center items-center gap-16 md:gap-24 w-full">
+                            <img src="./logos/logo_sehh.png" alt="SEHH" class="h-40 md:h-48 lg:h-64 w-auto transition-transform hover:scale-105" onerror="this.src='https://placehold.co/220x100/transparent/4a0404?text=SEHH'">
+                            <img src="./logos/logo_seth.png" alt="SETH" class="h-16 md:h-20 lg:h-24 w-auto transition-transform hover:scale-105" onerror="this.src='https://placehold.co/220x100/transparent/4a0404?text=SETH'">
+                        </div>
+                    </div>
+
+                    <!-- Fila 2: CFC centrado solo -->
+                    <div class="flex flex-col items-center w-full mt-4">
+                        <span class="text-xs font-black uppercase tracking-[0.2em] text-primary/50 mb-8 block text-center">CME credits application pending:</span>
+                        <div class="flex justify-center items-center">
+                            <img src="./logos/logo_cfc.PNG" alt="CFC - SNS" class="h-24 md:h-32 lg:h-40 w-auto transition-transform hover:scale-105" onerror="this.src='https://placehold.co/220x100/transparent/4a0404?text=CFC+SNS'">
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -706,48 +761,28 @@
         });
     </script>
 
-    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-    
-    <style>
-      /* MAQUILLAJE CORPORATIVO FORZADO EN LA LANDING (Tonos Rojos) */
-      :root {
-        --chat--color--primary: #4a0404; /* Sangre oscura */
-        --chat--color--primary-shade-50: #7f1d1d; 
-        --chat--color--primary--shade-100: #991b1b; 
-        --chat--color--secondary: #b91c1c; /* Carmesí */
-        --chat--color-secondary-shade-50: #dc2626; 
-        --chat--color-white: #ffffff;
-        --chat--color-light: #fef2f2; /* Rojo pastel */
-        --chat--color-dark: #2d1b1b; 
-        --chat--toggle--background: #4a0404; 
-        --chat--toggle--color: #ffffff; 
-      }
-      .chat-window {
-        box-shadow: 0 10px 25px rgba(74, 4, 4, 0.15) !important;
-        font-family: 'Inter', sans-serif;
-      }
-    </style>
-
+    <!-- Módulo n8n Chat AI BLINDADO -->
     <script type="module">
-      import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
-      createChat({
-        webhookUrl: 'https://n8n.asklepiosdat.com/webhook/6acd211e-83bd-40f7-9c66-b271b9e557a6/chat',
-        initialMessages: [
-            'Hello! I am the Academic Advisor at Hygeia Learning Hub.',
-            'How can I assist you today regarding the new State of the Art in Haemophilia program or our sponsorship options?'
-        ],
-        i18n: {
-            en: {
-                title: 'Hygeia Learning Hub', 
-                subtitle: 'Institutional Academic Advisory',
-                getStarted: 'New conversation', 
-                chatInput: { 
-                    placeholder: 'Type your institutional inquiry here...' 
+        createChat({
+            webhookUrl: 'https://n8n.asklepiosdat.com/webhook/6acd211e-83bd-40f7-9c66-b271b9e557a6/chat',
+            mode: 'window', // <-- CLAVE: Fuerza la burbuja flotante
+            initialMessages: [
+                'Hello! I am the Academic Advisor at Hygeia Learning Hub.',
+                'How can I assist you today regarding the new State of the Art in Haemophilia program or our sponsorship options?'
+            ],
+            i18n: {
+                en: {
+                    title: 'Hygeia Learning Hub', 
+                    subtitle: 'Institutional Academic Advisory', 
+                    getStarted: 'New conversation', 
+                    chatInput: { 
+                        placeholder: 'Type your institutional inquiry here...' 
+                    }
                 }
             }
-        }
-      });
+        });
     </script>
 </body>
 </html>
